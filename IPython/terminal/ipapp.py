@@ -74,6 +74,9 @@ ipython help console       # show the help for the console subcmd
 ipython notebook           # start the IPython notebook
 ipython help notebook      # show the help for the notebook subcmd
 
+ipython htmlterminal           # start the IPython htmlterminal
+ipython help htmlterminal      # show the help for the htmlterminal subcmd
+
 ipython profile create foo # create profile foo w/ default config files
 ipython help profile       # show the help for the profile subcmd
 
@@ -227,7 +230,10 @@ class TerminalIPythonApp(BaseIPythonApplication, InteractiveShellApp):
             """Launch the IPython Qt Console."""
         ),
         notebook=('IPython.html.notebookapp.NotebookApp',
-            """Launch the IPython HTML Notebook Server."""
+                  """Launch the IPython HTML Notebook Server."""
+        ),
+        htmlterminal=('IPython.htmlterminal.htmlterminalapp.HtmlTerminalApp',
+            """Launch the IPython HTML Terminal Server."""
         ),
         profile = ("IPython.core.profileapp.ProfileApp",
             "Create and manage IPython profiles."
@@ -315,7 +321,7 @@ class TerminalIPythonApp(BaseIPythonApplication, InteractiveShellApp):
             argv[idx] = '--pylab'
 
         return super(TerminalIPythonApp, self).parse_command_line(argv)
-    
+
     @catch_config_error
     def initialize(self, argv=None):
         """Do actions after construct, but before starting the app."""
